@@ -1,0 +1,160 @@
+#This part is intended to give you some practice with recursion. An ability to think and program
+#recursively is a vital part of thinking and implementing algorithms. 
+
+"""
+Although we teach programming using iteration as one of the fundamental control structures, recursion is arguably much more
+important. Any algorithm that can be expressed iteratively can be expressed recursively as well (albeit with implementation limitations
+in many cases) but the converse is most certainly not the case. Many algorithms are fundamentally recursive in nature and cannot
+reasonably be implemented using iteration. Algorithms involving recursive data structures like trees are an obvious case in point but
+recursion underpins the majority of graph algorithms, all dynamic programming problems and many other classes of algorithm.
+Designing recursive solutions to problems is often referred to as Divide and Conquer. 
+"""
+
+#simple example:
+def sum(data):
+    total = 0
+    for element in data:
+        total += element
+    return total
+
+#a recursive version is:
+def recursive_sum(data):
+    if len(data) == 0:
+        return 0
+    else:
+        return data[0] + recursive_sum(data[1:])
+    
+#or compact version:
+def recursive_sum(data):
+    return 0 if len(data) == 0 else data[0] + recursive_sum(data[1:])
+
+
+#It turns out that the above implementation has quadratic complexity because 
+#evaluating data[1:] involves copying the entire list. We can improve the 
+#efficiency (to linear time) by instead writing the recursive code as below.
+def recursive_sum(data, start=0):
+    if len(data) <= start:
+        return 0
+    else:
+        return data[start] + recursive_sum(data, start+1)
+    
+
+#Q12
+def concat_list(strings):
+ 
+    if len(strings) == 0:
+        return ''
+    else:
+        return strings[0] + concat_list(strings[1:])
+        #return strings[0] + concat_list(strings[1:len(strings)])
+   
+        
+
+ans = concat_list(['a', 'hot', 'day'])
+print(ans)
+
+ans = concat_list(['x', 'y', 'z'])
+print(ans)
+
+print(concat_list([]))
+
+ans = concat_list('this is a sentence'.split())
+print(ans)
+
+
+#Q13
+def product(data):
+    
+    if len(data) == 0:
+        return 1
+    else:
+        return data[0] * product(data[1:])
+        #return data[0] * product(data[1:len(data)])
+
+print(product([1, 13, 9, -11]))
+print(product([]))
+print(product(list(range(1, 31))))
+
+
+#Q14 - approach 1
+def backwards(s):
+    
+    if len(s) == 0:
+        return ''
+    else:
+        return s[-1] + backwards(s[:-1])
+    
+print(backwards("Hi there!"))
+print(backwards("")) 
+print(backwards("H")) 
+print(backwards("abcdefg0123456"))     
+
+
+#Q14 - approach 2
+def backwards(s):
+    
+    if len(s)==0:
+        return ''
+    else:
+        return backwards(s[1:len(s)]) + s[0]
+    
+print(backwards("Hi there!"))
+print(backwards("")) 
+print(backwards("H")) 
+print(backwards("abcdefg0123456")) 
+
+    
+       
+#Q15 
+def odds(data):
+    
+    if len(data) == 0:
+        return []
+    if data[0] % 2 == 1:
+    #if data[0]%2!=0:
+        return [data[0]] + odds(data[1:])
+    return odds(data[1:])
+    
+    
+print(odds([0, 1, 12, 13, 14, 9, -11, -20]))
+print(odds(list(range(-11, 11))))
+
+
+
+#Q16
+def squares(data):
+    
+    if len(data) == 0:
+        return []
+    else:
+        return [(data[0])**2] + squares(data[1:])
+    
+    
+print(squares([1, 13, 9, -11]))
+data = list(range(1, 11))
+print(squares(data))
+print(data)
+    
+    
+#Q17
+def find(data, value):
+
+    if len(data) == 0:
+        return -1
+    
+    elif data[0] == value:
+        return 0
+    
+    else:
+        result = find(data[1:], value)
+        if result != -1:
+            result += 1
+            return result
+        return result
+        
+
+print(find(["hi", "there", "you", "there"], "there")) 
+print(find([10, 20, 30], 0))
+print(find(list(range(0,51)), 50))
+print(find(list(range(0,51)), 49))
+print(find(list(range(0,51)), 51))
