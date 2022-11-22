@@ -1,0 +1,67 @@
+#Algorithm thinking - this part of code is mostly related to tcorrectness and efficiency.
+
+#Q8
+def almost_all(numbers):
+    return [sum(numbers) - x for x in numbers]
+
+print(almost_all([1,2,3]))
+print(almost_all([1]))
+
+#--------------------------------------------------------------------------------
+
+#Q9 The worst-case time complexity
+def almost_all(numbers):
+    return [sum(numbers) - x for x in numbers]
+
+
+#Q9 approach1 - The worst-case time complexity of an asymptotically most efficient implementation
+def almost_all(numbers):
+    lis = []
+    total = sum(numbers)
+
+    for i in range(0,len(numbers)):
+        lis.append(total-numbers[i])
+    return lis
+
+print(almost_all([1,2,3]))
+almost_all(list(range(10**5)))
+print("OK")
+print(almost_all(list(range(5,50,5))))
+
+#Q9 approach2 - The worst-case time complexity of an asymptotically most efficient implementation
+def almost_all(numbers):
+    total = sum(numbers)
+    return [total - i for i in numbers]
+
+print(almost_all([1,2,3]))
+almost_all(list(range(10**5)))
+print("OK")
+print(almost_all(list(range(5,50,5))))
+
+#--------------------------------------------------------------------------------
+
+#Q11 The worst-case time complexity
+def sort_of(numbers):
+    result = []
+    for i in range(len(numbers)):
+        sub = sorted(numbers[i:])
+        result.append(sub[0])
+    return result
+
+print(sort_of([1, 2, 3, 3]))
+
+
+#Q11 Write an asymptotically most efficient implementation of the function
+def sort_of(numbers):
+    if numbers:
+        smallest = numbers[-1]
+    result = []
+    for i in numbers[::-1]:
+        if smallest > i:
+            smallest = i
+        result.append(smallest)
+    result.reverse()
+    return result
+print(sort_of([1, 2, 3, 3]))
+sort_of(list(range(10**5)))
+print("OK")
