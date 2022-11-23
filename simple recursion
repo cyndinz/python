@@ -155,6 +155,7 @@ def find(data, value):
 
 print(find(["hi", "there", "you", "there"], "there")) 
 print(find([10, 20, 30], 0))
+print(find([10, 20, 30], 30))
 print(find(list(range(0,51)), 50))
 print(find(list(range(0,51)), 49))
 print(find(list(range(0,51)), 51))
